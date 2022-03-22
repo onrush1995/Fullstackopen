@@ -1,31 +1,54 @@
-const App = () => {
-    const course = {
-        name: 'Half Stack application development',
-        parts: [
-            {
-                name: 'Fundamentals of React',
-                exercises: 10
-            },
-            {
-                name: 'Using props to pass data',
-                exercises: 7
-            },
-            {
-                name: 'State of a component',
-                exercises: 14
-            }
-        ]
-    };
+import React, { useState } from 'react';
 
+const Statistics = ({ good, bad, neutral }) => {
     return (
         <div>
-            <h1>{course.name}</h1>
-            <p>{course.parts[0].name}</p>
-            <p>{course.parts[1].name}</p>
-            <p>{course.parts[2].name}</p>
-            <p>
-                Number of exercises {course.parts[0].exercises + course.parts[1].exercises + course.parts[2].exercises}
-            </p>
+            <h1>Statistics</h1>
+            <p>Good {good}</p>
+            <p>Bad {bad}</p>
+            <p>Neutral {neutral}</p>
+        </div>
+    );
+};
+const App = () => {
+    const [
+        good,
+        setGood
+    ] = useState(0);
+    const [
+        neutral,
+        setNeutral
+    ] = useState(0);
+    const [
+        bad,
+        setBad
+    ] = useState(0);
+
+    const goodHandleClick = () => {
+        onclick = () => setGood(good + 1);
+    };
+
+    const badHandleClick = () => {
+        onclick = () => setBad(bad + 1);
+    };
+
+    const neutralHandleClick = () => {
+        onclick = () => setNeutral(neutral + 1);
+    };
+    return (
+        <div>
+            <h1>Giving feedback</h1>
+            <button className='goodButton' onClick={goodHandleClick}>
+                Good
+            </button>
+
+            <button className='badButton' onClick={badHandleClick}>
+                Bad
+            </button>
+            <button className='neutralButton' onClick={neutralHandleClick}>
+                neutral
+            </button>
+            <Statistics good={good} bad={bad} neutral={neutral} />
         </div>
     );
 };
