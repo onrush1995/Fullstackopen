@@ -61,12 +61,41 @@ const Statistics = ({ good, bad, neutral, goodrep, badrep, neutralrep }) => {
     return (
         <div>
             <h1>Statistics</h1>
-            <Good text='good' Good={good} />
-            <Bad text='bad' Bad={bad} />
-            <Neutral text='neutral' Neutral={neutral} />
-            <AllStatisticLine text='all' All={All} />
-            <StatisticLine text='average' Average={Average} />
-            <PositiveStatisticLine Positive={Positive} />
+
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <Good text='good' Good={good} />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Bad text='bad' Bad={bad} />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <Neutral text='neutral' Neutral={neutral} />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <AllStatisticLine text='all' All={All} />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <StatisticLine text='average' Average={Average} />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <PositiveStatisticLine Positive={Positive} />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     );
 };
