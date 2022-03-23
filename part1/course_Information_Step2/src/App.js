@@ -1,14 +1,6 @@
 import React, { useState } from 'react';
 
-const AvgPercecnt = ({ good, bad, neutral, goodrep, badrep, neutralrep }) => {
-    return (
-        <div>
-            <p>Average: {(goodrep + badrep + neutralrep) / (good + bad + neutral)}</p>
-            <p>Positive : {goodrep / (good + bad + neutral) * 100} %</p>
-        </div>
-    );
-};
-const Statistics = ({ good, bad, neutral }) => {
+const Statistics = ({ good, bad, neutral, goodrep, badrep, neutralrep }) => {
     return (
         <div>
             <h1>Statistics</h1>
@@ -16,9 +8,12 @@ const Statistics = ({ good, bad, neutral }) => {
             <p>Bad {bad}</p>
             <p>Neutral {neutral}</p>
             <p>All {good + bad + neutral}</p>
+            <p>Average: {(goodrep + badrep + neutralrep) / (good + bad + neutral)}</p>
+            <p>Positive : {goodrep / (good + bad + neutral) * 100} %</p>
         </div>
     );
 };
+
 const App = () => {
     //  Good score count
     const [
@@ -81,11 +76,7 @@ const App = () => {
             <button className='neutralButton' onClick={neutralHandleClick}>
                 Neutral
             </button>
-            <Statistics good={good} bad={bad} neutral={neutral} />
-            {/* <p>{goodrep}</p>
-            <p>{badrep}</p>
-            <p>{neutralrep}</p> */}
-            <AvgPercecnt
+            <Statistics
                 good={good}
                 bad={bad}
                 neutral={neutral}
