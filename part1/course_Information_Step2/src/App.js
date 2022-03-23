@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
 
+const AvgPercecnt = ({ good, bad, neutral, goodrep, badrep, neutralrep }) => {
+    return (
+        <div>
+            <p>Average: {(goodrep + badrep + neutralrep) / (good + bad + neutral)}</p>
+            <p>Positive : {goodrep / (good + bad + neutral) * 100} %</p>
+        </div>
+    );
+};
 const Statistics = ({ good, bad, neutral }) => {
     return (
         <div>
@@ -7,33 +15,58 @@ const Statistics = ({ good, bad, neutral }) => {
             <p>Good {good}</p>
             <p>Bad {bad}</p>
             <p>Neutral {neutral}</p>
+            <p>All {good + bad + neutral}</p>
         </div>
     );
 };
 const App = () => {
+    //  Good score count
     const [
         good,
         setGood
     ] = useState(0);
+
+    const [
+        goodrep,
+        setGoodrep
+    ] = useState(0);
+
+    //  Neutral score count
     const [
         neutral,
         setNeutral
     ] = useState(0);
+
+    const [
+        neutralrep,
+        setNeutralrep
+    ] = useState(0);
+
+    //  Bad score count
     const [
         bad,
         setBad
     ] = useState(0);
 
+    const [
+        badrep,
+        setBadrep
+    ] = useState(0);
+
+    // Click count
     const goodHandleClick = () => {
-        onclick = () => setGood(good + 1);
+        setGood(good + 1);
+        setGoodrep((prevState) => prevState + 1);
     };
 
     const badHandleClick = () => {
-        onclick = () => setBad(bad + 1);
+        setBad(bad + 1);
+        setBadrep((prevState) => prevState - 1);
     };
 
     const neutralHandleClick = () => {
-        onclick = () => setNeutral(neutral + 1);
+        setNeutral(neutral + 1);
+        setNeutralrep((prevState) => prevState + 0);
     };
     return (
         <div>
@@ -46,9 +79,20 @@ const App = () => {
                 Bad
             </button>
             <button className='neutralButton' onClick={neutralHandleClick}>
-                neutral
+                Neutral
             </button>
             <Statistics good={good} bad={bad} neutral={neutral} />
+            {/* <p>{goodrep}</p>
+            <p>{badrep}</p>
+            <p>{neutralrep}</p> */}
+            <AvgPercecnt
+                good={good}
+                bad={bad}
+                neutral={neutral}
+                goodrep={goodrep}
+                badrep={badrep}
+                neutralrep={neutralrep}
+            />
         </div>
     );
 };
