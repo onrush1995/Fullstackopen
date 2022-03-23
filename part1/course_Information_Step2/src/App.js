@@ -1,23 +1,104 @@
 import React, { useState } from 'react';
 
+// StatisticLine for displaying a single statistic, e.g. the average score.
+
+const StatisticLine = ({ Average }) => {
+    return (
+        <div>
+            <p>Average: {Average}</p>
+        </div>
+    );
+};
+
+const PositiveStatisticLine = ({ Positive }) => {
+    return (
+        <div>
+            <p>Positive : {Positive} %</p>
+        </div>
+    );
+};
+
+const AllStatisticLine = ({ All }) => {
+    return (
+        <div>
+            <p>All {All} </p>
+        </div>
+    );
+};
+
+const Good = ({ Good }) => {
+    return (
+        <div>
+            <p>Good {Good} </p>
+        </div>
+    );
+};
+
+const Bad = ({ Bad }) => {
+    return (
+        <div>
+            <p>Bad {Bad} </p>
+        </div>
+    );
+};
+
+const Neutral = ({ Neutral }) => {
+    return (
+        <div>
+            <p>Neutral {Neutral} </p>
+        </div>
+    );
+};
+
 const Statistics = ({ good, bad, neutral, goodrep, badrep, neutralrep }) => {
     const All = good + bad + neutral;
-
     const Average = (goodrep + badrep + neutralrep) / (good + bad + neutral);
-
     const Positive = goodrep / (good + bad + neutral) * 100;
+
     if (All === 0) {
         return <div>No feedback given</div>;
     }
     return (
         <div>
             <h1>Statistics</h1>
-            <p>Good {good}</p>
-            <p>Bad {bad}</p>
-            <p>Neutral {neutral}</p>
-            <p>All {All}</p>
-            <p>Average: {Average}</p>
-            <p>Positive : {Positive} %</p>
+            <Good text='good' Good={good} />
+            <Bad text='bad' Bad={bad} />
+            <Neutral text='neutral' Neutral={neutral} />
+            <AllStatisticLine text='all' All={All} />
+            <StatisticLine text='average' Average={Average} />
+            <PositiveStatisticLine Positive={Positive} />
+        </div>
+    );
+};
+
+// Button for defining the buttons used for submitting feedback
+
+const GoodButton = ({ handleClick }) => {
+    return (
+        <div>
+            <button className='goodButton' onClick={handleClick}>
+                Good
+            </button>
+        </div>
+    );
+};
+
+const BadButton = ({ handleClick }) => {
+    return (
+        <div>
+            <button className='badButton' onClick={handleClick}>
+                Bad
+            </button>
+        </div>
+    );
+};
+
+const NeutralButton = ({ handleClick }) => {
+    return (
+        <div>
+            <button className='neutralButton' onClick={handleClick}>
+                Neutral
+            </button>
         </div>
     );
 };
@@ -74,16 +155,9 @@ const App = () => {
     return (
         <div>
             <h1>Giving feedback</h1>
-            <button className='goodButton' onClick={goodHandleClick}>
-                Good
-            </button>
-
-            <button className='badButton' onClick={badHandleClick}>
-                Bad
-            </button>
-            <button className='neutralButton' onClick={neutralHandleClick}>
-                Neutral
-            </button>
+            <GoodButton handleClick={goodHandleClick} />
+            <BadButton handleClick={badHandleClick} />
+            <NeutralButton handleClick={neutralHandleClick} />
             <Statistics
                 good={good}
                 bad={bad}
