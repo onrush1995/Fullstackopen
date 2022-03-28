@@ -1,5 +1,25 @@
 import React, { useState } from 'react';
 
+const History = (props) => {
+    const newArray = props.allClicks.map((x) => x);
+    console.log(newArray);
+
+    const initialValue = 0;
+    const reducer = (accumulator, item) => {
+        return accumulator + item;
+    };
+    const total = props.allClicks.reduce(reducer, initialValue);
+    if (props.allClicks.length === 0) {
+        return <div>the app is used by pressing the buttons</div>;
+    }
+    return (
+        <div>
+            button press history: {props.allClicks.join(' ')}
+            <h1>{total}</h1>
+        </div>
+    );
+};
+
 const App = () => {
     const [
         left,
@@ -12,15 +32,15 @@ const App = () => {
     const [
         allClicks,
         setAll
-    ] = useState((a) => (a += 1));
+    ] = useState([]);
 
     const handleLeftClick = () => {
-        setAll(allClicks);
+        setAll(allClicks.concat(1));
         setLeft(left + 1);
     };
 
     const handleRightClick = () => {
-        setAll(allClicks);
+        setAll(allClicks.concat(-1));
         setRight(right + 1);
     };
 
@@ -30,7 +50,7 @@ const App = () => {
             <button onClick={handleLeftClick}>left</button>
             <button onClick={handleRightClick}>right</button>
             {right}
-            <p>{allClicks}</p>
+            <History allClicks={allClicks} />
         </div>
     );
 };
