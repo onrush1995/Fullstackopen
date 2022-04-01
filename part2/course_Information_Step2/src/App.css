@@ -1,0 +1,63 @@
+body {
+    background-color: #282c34;
+    color: white;
+    padding: 40px;
+    font-family: Arial;
+}
+
+.goodButton {
+    display: flex;
+    background-color: #2c2c2b;
+    border: none;
+    border-radius: 8px;
+    color: whitesmoke;
+    padding: 15px 32px;
+    margin: 1em;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    transition-duration: 0.4s;
+}
+
+.goodButton:hover {
+    background-color: #4caf50; /* Green */
+    color: white;
+}
+
+.badButton {
+    display: flex;
+    background-color: #2c2c2b;
+    border: none;
+    border-radius: 8px;
+    color: whitesmoke;
+    padding: 15px 32px;
+    margin: 1em;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    transition-duration: 0.4s;
+}
+
+.badButton:hover {
+    background-color: #ec0f0f; /* Green */
+    color: white;
+}
+
+.neutralButton {
+    display: flex;
+    background-color: #2c2c2b;
+    border: none;
+    border-radius: 8px;
+    color: whitesmoke;
+    padding: 15px 32px;
+    margin: 1em;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    transition-duration: 0.4s;
+}
+
+.neutralButton:hover {
+    background-color: #f9f9fa; /* Green */
+    color: black;
+}
