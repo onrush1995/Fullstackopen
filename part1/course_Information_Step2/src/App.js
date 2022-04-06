@@ -1,91 +1,35 @@
 import { useState } from 'react';
 
 const App = () => {
-    const anecdotes = [
+    const course = {
+      id: 1,
+      name: 'Half Stack application development',
+      parts: [
         {
-            id: 0,
-            quote: 'If it hurts, do it more often'
+          name: 'Fundamentals of React',
+          exercises: 10,
+          id: 1
         },
         {
-            id: 1,
-            quote: 'Adding manpower to a late software project makes it later!'
+          name: 'Using props to pass data',
+          exercises: 7,
+          id: 2
         },
         {
-            id: 2,
-            quote:
-                'The first 90 percent of the code accounts for the first 10 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.'
-        },
-        {
-            id: 3,
-            quote:
-                'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.'
-        },
-        {
-            id: 4,
-            quote: 'Premature optimization is the root of all evil.'
-        },
-        {
-            id: 5,
-            quote:
-                'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
-        },
-        {
-            id: 6,
-            quote:
-                'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients'
+          name: 'State of a component',
+          exercises: 14,
+          id: 3
         }
-    ];
+      ]
+    }
 
-    const [
-        selected,
-        setSelected
-    ] = useState(0);
-
-    const [
-        vote,
-        setVote
-    ] = useState([]);
-
-    const [
-        totalVote,
-        setTotalVote
-    ] = useState(0);
-
-    const [
-        inTotal,
-        setInTotal
-    ] = useState([]);
-
-    const rpt = vote.reduce((cnt, cur) => ((cnt[cur] = cnt[cur] + 1 || 1), cnt), {});
-
-    console.log(inTotal);
-
-    const handleClick = () => {
-        const minimum = 0;
-        const maximum = anecdotes.length;
-        const randomnumber = Math.floor(Math.random() * (maximum - minimum)) + minimum;
-        setSelected(randomnumber);
-    };
-
-    const voteCount = () => {
-        setVote(vote.concat(idNumber));
-        setTotalVote(totalVote + 1);
-        setInTotal(rpt);
-    };
-    const selectedQuote = anecdotes[selected].quote;
-    const idNumber = anecdotes[selected].id;
-
-    return (
-        <div>
-            <h1>{selectedQuote}</h1>
-            <button onClick={handleClick}>Next Anecdotes</button>
-            <button onClick={voteCount}>Vote</button>
-            <h1>{vote.length} vote has been given</h1>
-            <h1>
-                {selectedQuote} is carriedout this id {idNumber}
-            </h1>
-        </div>
-    );
-};
+   const propsName = course.parts.map(x=><div>{x.name}-{x.exercises}</div>);
+   //const partsName = course.parts.map(x=>x.name)
+   //const total = course.parts.reduce((acc,item)=> acc+item,0)
+return(<div>
+    <h1>{course.name}</h1>
+    <h2>{propsName} </h2>
+</div>)
+}
 
 export default App;
