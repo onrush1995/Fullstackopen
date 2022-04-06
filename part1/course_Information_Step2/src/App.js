@@ -23,13 +23,13 @@ const App = () => {
       ]
     }
 
-  const propsName = course.parts.map(x=><div>{x.name}-{x.exercises}</div>);
+  const courseNameAndExr = course.parts.map(x=><div>{x.name}-{x.exercises}</div>);
   const exercisesCount=course.parts.map(exr=> exr.exercises)
   const total = exercisesCount.reduce((acc,item)=> acc+item,0)
 
 return(<div>
     <h1>{course.name}</h1>
-    <div>{propsName} </div>
+    <div>{courseNameAndExr} </div>
     <h2>Total of {total} exercises</h2>
 </div>)
 }
