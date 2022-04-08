@@ -1,30 +1,65 @@
-import React, { useState } from 'react';
-import "./components/App.css";
+import React, { useState } from 'react'
 
-function App(){
-const [submitting,setSubmitting]= useState(false);
-const handleSubmit = event =>{
-  event.preventDefault();
-  setSubmitting(true);
+const App=()=>{
 
-  setTimeout(()=>{setSubmitting(false)},3000)
+  const [values,setValues]= useState({
+    firstName:"",
+    lastName:"",
+    email:""
+  })
 
-}
+  const handleFirstName=(event)=>{
+    setValues({...values,firstName: event.target.value})
+  }
+  
+  const handleLastName=(event)=>{
+    setValues({...values,lastName: event.target.value})
+  }
+
+  const handleEmail=(event)=>{
+    setValues({...values,email: event.target.value})
+  }
+
+  const handleSubmit=(event)=>{
+    event.preventDefault();
+    setSubmitted(true);
+  }
+  
+  const [submitted,setSubmitted]= useState(false);
+  
 
   return(
-    <div className='wrapper'>
-      <h1>How About Them Apples</h1>
-      {submitting && <div> Submitting From...</div>}
+    <div>
       <form onSubmit={handleSubmit}>
-        <fieldset>
-          <label>
-            <input/>
-          </label>
-        </fieldset>
-        <button type="submit">Submit</button>
+        {submitted ? <div>Success! Thanks for your response</div>: null}
+        <input 
+        onChange={handleFirstName}
+        value={values.firstName}
+        placeholder='First name'
+        name='firstName'
+        required= "Required"
+        />
+        <input 
+        onChange={handleLastName}
+        value={values.lastName}
+        placeholder='Last name'
+        name='lastName'
+        required= "Required"
+        />
+        <input 
+        onChange={handleEmail}
+        value={values.email}
+        placeholder='Email'
+        name='email'
+        required= "Required"
+        />
+        <button>Submit</button>
       </form>
+    
     </div>
   )
 }
+
+
 
 export default App;
