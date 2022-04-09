@@ -1,65 +1,76 @@
-import React, { useState } from 'react'
+import React, { useReducer, useState } from 'react';
 
-const App=()=>{
 
-  const [values,setValues]= useState({
-    firstName:"",
-    lastName:"",
-    email:""
-  })
+const formReducer = (state, event) => {
+ return {
+   ...state,
+   [event.name]: event.value
+ }
+}
 
-  const handleFirstName=(event)=>{
-    setValues({...values,firstName: event.target.value})
-  }
-  
-  const handleLastName=(event)=>{
-    setValues({...values,lastName: event.target.value})
-  }
+function App() {
+  const [formData, setFormData] = useReducer(formReducer, {});
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleEmail=(event)=>{
-    setValues({...values,email: event.target.value})
-  }
-
-  const handleSubmit=(event)=>{
+  const handleSubmit = event => {
     event.preventDefault();
-    setSubmitted(true);
-  }
-  
-  const [submitted,setSubmitted]= useState(false);
-  
+    setSubmitting(true);
 
+    setTimeout(() => {
+      setSubmitting(false);
+    }, 3000);
+  }
+
+  const handleChange = event => {
+    setFormData({
+      name: event.target.name,
+      value: event.target.value,
+    });
+  }
   return(
-    <div>
+    <div className="wrapper">
+      <h1>How About Them Apples</h1>
+      {submitting &&
+        <div>
+          You are submitting the following:
+          <ul>
+            {Object.entries(formData).map(([name, value]) => (
+              <li key={name}><strong>{name}</strong>: {value.toString()}</li>
+            ))}
+          </ul>
+        </div>
+      }
       <form onSubmit={handleSubmit}>
-        {submitted ? <div>Success! Thanks for your response</div>: null}
-        <input 
-        onChange={handleFirstName}
-        value={values.firstName}
-        placeholder='First name'
-        name='firstName'
-        required= "Required"
-        />
-        <input 
-        onChange={handleLastName}
-        value={values.lastName}
-        placeholder='Last name'
-        name='lastName'
-        required= "Required"
-        />
-        <input 
-        onChange={handleEmail}
-        value={values.email}
-        placeholder='Email'
-        name='email'
-        required= "Required"
-        />
-        <button>Submit</button>
+        <fieldset>
+          <label>
+            <p>Name</p>
+            <input name="name" onChange={handleChange}/>
+          </label>
+        </fieldset>
+        <fieldset>
+         <label>
+           <p>Apples</p>
+           <select name="apple" onChange={handleChange}>
+               <option value="">--Please choose an option--</option>
+               <option value="fuji">Fuji</option>
+               <option value="jonathan">Jonathan</option>
+               <option value="honey-crisp">Honey Crisp</option>
+           </select>
+         </label>
+         <label>
+           <p>Count</p>
+           <input type="number" name="count" onChange={handleChange} step="1"/>
+         </label>
+         <label>
+           <p>Gift Wrap</p>
+           <input type="checkbox" name="gift-wrap" onChange={handleChange} />
+         </label>
+       </fieldset>
+        <button type="submit">Submit</button>
       </form>
-    
     </div>
   )
 }
-
 
 
 export default App;
