@@ -51,15 +51,6 @@ const App = () => {
         setTotalVote
     ] = useState(0);
 
-    const [
-        inTotal,
-        setInTotal
-    ] = useState([]);
-
-    const rpt = vote.reduce((cnt, cur) => ((cnt[cur] = cnt[cur] + 1 || 1), cnt), {});
-
-    console.log(inTotal);
-
     const handleClick = () => {
         const minimum = 0;
         const maximum = anecdotes.length;
@@ -70,7 +61,6 @@ const App = () => {
     const voteCount = () => {
         setVote(vote.concat(idNumber));
         setTotalVote(totalVote + 1);
-        setInTotal(rpt);
     };
     const selectedQuote = anecdotes[selected].quote;
     const idNumber = anecdotes[selected].id;
@@ -84,6 +74,7 @@ const App = () => {
             <h1>
                 {selectedQuote} is carriedout this id {idNumber}
             </h1>
+            <h1>I vote for {vote}</h1>
         </div>
     );
 };
